@@ -42,10 +42,11 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{ secrets.AWS_ECR_REPO }}
-          IMAGE_TAG: test_addressbook_image
+          IMAGE_TAG: "latest"
+          IMAGE_NAME: "demo-repo-actions"
         run: |
          aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/q9l0l4v9
-         docker build -t demo-repo-actions .
-         docker tag demo-repo-actions:latest public.ecr.aws/q9l0l4v9/demo-repo-actions:latest
-         docker push public.ecr.aws/q9l0l4v9/demo-repo-actions:latest
+         docker build -t $IMAGE_NAME .
+         docker tag $IMAGE_NAME:$IMAGE_TAG public.ecr.aws/q9l0l4v9/demo-repo-actions:$IMAGE_TAG
+         docker push public.ecr.aws/q9l0l4v9/demo-repo-actions:$IMAGE_TAG
          
