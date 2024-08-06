@@ -20,7 +20,10 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-
+          
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
+        
       - name: Setup AWS ECR Details
         uses: aws-actions/configure-aws-credentials@v1
         with:
