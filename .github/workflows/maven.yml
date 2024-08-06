@@ -47,6 +47,6 @@ jobs:
         run: |
          aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/q9l0l4v9
          docker build -t $IMAGE_NAME .
-         docker tag $IMAGE_NAME:$IMAGE_TAG public.ecr.aws/q9l0l4v9/demo-repo-actions:$IMAGE_TAG
-         docker push public.ecr.aws/q9l0l4v9/demo-repo-actions:$IMAGE_TAG
+         docker tag $IMAGE_NAME:$IMAGE_TAG $ECR_REPOSITORY:$IMAGE_TAG
+         docker push $ECR_REPOSITORY:$IMAGE_TAG
          
